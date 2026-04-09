@@ -8,7 +8,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-# ✅ Install .NET 9 (IMPORTANT)
+
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
@@ -22,7 +22,7 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: Build
 
-# ✅ Publish (AOT already enabled in csproj)
+
 - script: dotnet publish -c $(buildConfiguration) -r win-x64 --self-contained true -o $(Build.ArtifactStagingDirectory)
   displayName: Publish AOT
 
