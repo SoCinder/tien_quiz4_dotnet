@@ -24,11 +24,19 @@ namespace tien_quiz4_dotnet
             };
 
             var todosApi = app.MapGroup("/todos");
+
             todosApi.MapGet("/", () => sampleTodos);
+
             todosApi.MapGet("/{id}", (int id) =>
                 sampleTodos.FirstOrDefault(a => a.Id == id) is { } todo
                     ? Results.Ok(todo)
                     : Results.NotFound());
+
+            
+            app.MapGet("/db-message", () =>
+            {
+                return "Database access has already been done on April 6, 2026 by TIEN";
+            });
 
             app.Run();
         }
@@ -39,6 +47,5 @@ namespace tien_quiz4_dotnet
     [JsonSerializable(typeof(Todo[]))]
     internal partial class AppJsonSerializerContext : JsonSerializerContext
     {
-
     }
 }
